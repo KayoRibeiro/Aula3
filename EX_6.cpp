@@ -18,9 +18,9 @@ int main()
 	
 	printf("\n%p", &p);
 	
-	p = &a;
 	
-	printf("\n%p", &p);
+	
+	printf("\n%i", *p);
 	
 	printf("\n%f", b);
 	
