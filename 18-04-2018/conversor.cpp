@@ -60,9 +60,11 @@ void display(node *temp)
 {
 	if (temp != NULL)
 	{
+		if(temp->prev != NULL ) printf("(");
 		display(temp->prev);
 		printf("%c", temp->ch);
 		display(temp->next);
+		if(temp->next != NULL )printf(")");
 	}
 }
  
