@@ -1,0 +1,109 @@
+#include<stdio.h>
+#include<stdlib.h>
+
+
+
+
+struct fila
+{
+	int pilha[10];
+	int position;
+	int elemento;	
+};
+struct pilha 
+{
+	int pilha[10];
+	int Last;
+};
+
+
+typedef struct pilha Pilha;
+typedef struct fila Fila;
+
+Fila* createRoll();
+Pilha* createP();
+void push(Pilha* pilha, int input);
+int pop(Pilha* pilha);
+void Insert(Fila* fila, int input);
+
+int main ()
+{
+	Pilha* pilha1 = createP();
+	Pilha* pilha2 = createP();
+	Fila* fila = createRoll();
+	
+	int input = -1;
+	
+	while(input != 0)
+	{
+		printf("Push: ");
+		scanf("%i", &input);
+		push(pilha1, input);
+	}
+	
+	puts("");
+	
+	while(pilha1->Last != -1)
+	{
+		push(pilha2,pop(pilha1));
+		printf("Pop: %i\n", pilha2->pilha[pilha2->Last]);
+	}
+	
+	printf("\nFila\n\n");
+	
+	while(pilha2->Last != -1)
+	{
+		Insert(fila,pop(pilha2));
+		printf("Fila: %i\n", fila->pilha[fila->position]);
+	}
+	
+	return 0;
+}
+
+void push(Pilha* pilha, int input)
+{
+	pilha->Last++;
+	pilha->pilha[pilha->Last] = input;
+}
+
+Fila* createRoll()
+{
+	Fila* criar = (Fila*) malloc(sizeof(Fila));
+	if(criar != NULL)
+	{
+		criar->position = 5;
+		criar->elemento = 0;
+		
+		return criar;
+	}
+}
+
+void Insert(Fila* fila, int input)
+{
+	fila->position = (fila->position+fila->elemento)%10;
+	fila->elemento++;
+	fila->pilha[fila->position] = input;
+}
+
+
+int pop(Pilha* pilha)
+{
+	int input = pilha->pilha[pilha->Last];
+	pilha->Last--;
+	
+	return input;
+}
+Pilha* createP()
+{
+	Pilha* criar = (Pilha*) malloc (sizeof (Pilha));
+	if(criar != NULL)
+	{
+		criar->Last = -1;
+		
+		return criar;
+	}
+}
+
+
+
+
